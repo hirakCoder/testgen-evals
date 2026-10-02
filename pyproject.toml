@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "testgen-evals"
+version = "0.1.0"
+description = "An evaluation harness for LLM-generated test cases."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Hirak Banerjee", email = "hirak.b@hotmail.com" }]
+keywords = ["llm", "evaluation", "testing", "sdet", "llm-as-judge"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Software Development :: Testing",
+]
+dependencies = []
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.40"]
+openai = ["openai>=1.40"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[project.scripts]
+testgen-evals = "testgen_evals.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["testgen_evals*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "W"]

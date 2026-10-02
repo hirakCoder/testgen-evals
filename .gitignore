@@ -1,0 +1,23 @@
+# secrets
+.env
+.env.*
+*.key
+
+# raw LLM responses are large and may contain noise; summaries are committed
+runs/*/raw/
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# editors / os
+.DS_Store
+.idea/
+.vscode/
