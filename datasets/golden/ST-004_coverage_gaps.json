@@ -1,0 +1,74 @@
+{
+  "story_id": "ST-004",
+  "provider": "golden",
+  "model": "hand-written",
+  "cases": [
+    {
+      "id": "TC-1",
+      "title": "Reset link is emailed and expires after 30 minutes",
+      "type": "positive",
+      "covers": [
+        "AC-1"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "Open the forgot-password form and submit the registered address user@example.com",
+          "expected": "A confirmation message is shown and a reset email is delivered to the inbox"
+        },
+        {
+          "action": "Wait 31 minutes and open the link from the email",
+          "expected": "The page shows that the link has expired and offers to request a new one"
+        }
+      ]
+    },
+    {
+      "id": "TC-2",
+      "title": "Reset link cannot be reused",
+      "type": "negative",
+      "covers": [
+        "AC-3"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "Request a reset link and complete a password reset with it",
+          "expected": "The password is changed and the user is redirected to login"
+        },
+        {
+          "action": "Open the same link again",
+          "expected": "The page shows 'This link has already been used'"
+        }
+      ]
+    },
+    {
+      "id": "TC-3",
+      "title": "New password shorter than 12 characters is rejected",
+      "type": "negative",
+      "covers": [
+        "AC-4",
+        "AC-9"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "Open a valid reset link and enter the password 'short1' twice",
+          "expected": "An inline error says the password must be at least 12 characters and the form is not submitted"
+        }
+      ]
+    },
+    {
+      "id": "TC-4",
+      "title": "Other sessions are signed out after reset",
+      "type": "positive",
+      "covers": [],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "Log in on a second browser, then complete a password reset in the first browser",
+          "expected": "The second browser's next request is redirected to the login page because all other active sessions for the account are signed out"
+        }
+      ]
+    }
+  ]
+}

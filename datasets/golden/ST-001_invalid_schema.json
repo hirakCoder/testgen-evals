@@ -1,0 +1,86 @@
+{
+  "test_cases": [
+    {
+      "id": "TC-1",
+      "title": "Valid percentage code reduces subtotal",
+      "type": "positive",
+      "covers": [
+        "AC-1"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "Apply code SAVE10 to a 50.00 order",
+          "expected": "Subtotal shows 45.00 before payment"
+        }
+      ]
+    },
+    {
+      "id": "TC-2",
+      "title": "Expired code is rejected",
+      "type": "negative",
+      "covers": [
+        "AC-2"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "Apply code OLD2020",
+          "expected": "Message 'This code is not valid' is shown and the total is unchanged"
+        }
+      ]
+    },
+    {
+      "id": "TC-3",
+      "title": "Second code replaces first",
+      "type": "smoke",
+      "covers": [
+        "AC-3"
+      ],
+      "steps": [
+        {
+          "action": "Apply SAVE10 then apply SAVE20",
+          "expected": "SAVE20 is applied and a note says it replaced SAVE10"
+        }
+      ]
+    },
+    {
+      "id": "TC-4",
+      "title": "Minimum order value enforced",
+      "type": "negative",
+      "covers": [
+        "AC-4"
+      ]
+    },
+    {
+      "id": "TC-5",
+      "title": "Removing code restores total",
+      "type": "positive",
+      "covers": [
+        "AC-5"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "Apply SAVE10 then click Remove",
+          "expected": "Total returns to 50.00"
+        }
+      ]
+    },
+    {
+      "id": "TC-5",
+      "title": "Duplicate id case",
+      "type": "positive",
+      "covers": [
+        "AC-5"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "Apply SAVE10 then click Remove",
+          "expected": "Total returns to 50.00"
+        }
+      ]
+    }
+  ]
+}

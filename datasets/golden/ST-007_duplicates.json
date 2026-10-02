@@ -1,0 +1,90 @@
+{
+  "story_id": "ST-007",
+  "provider": "golden",
+  "model": "hand-written",
+  "cases": [
+    {
+      "id": "TC-1",
+      "title": "Increase quantity updates line total and cart total",
+      "type": "positive",
+      "covers": [
+        "AC-1"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "In a cart containing one 'Blue Mug' at 12.00, change the quantity field from 1 to 3",
+          "expected": "The line total shows 36.00 and the cart total updates to 36.00 without a page reload"
+        }
+      ]
+    },
+    {
+      "id": "TC-2",
+      "title": "Increasing quantity updates the line total and the cart total",
+      "type": "positive",
+      "covers": [
+        "AC-1"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "In a cart containing one 'Blue Mug' at 12.00, change the quantity field from 1 to 3",
+          "expected": "The line total shows 36.00 and the cart total updates to 36.00 without a page reload"
+        }
+      ]
+    },
+    {
+      "id": "TC-3",
+      "title": "Quantity above stock snaps to maximum",
+      "type": "negative",
+      "covers": [
+        "AC-2"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "With 4 units in stock, set the quantity to 10",
+          "expected": "The field snaps to 4 and a notice says only 4 are available"
+        }
+      ]
+    },
+    {
+      "id": "TC-4",
+      "title": "Setting quantity to zero removes the item with undo",
+      "type": "edge",
+      "covers": [
+        "AC-3"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "Set the quantity to 0",
+          "expected": "works as expected"
+        },
+        {
+          "action": "Click 'Undo' within 5 seconds",
+          "expected": ""
+        },
+        {
+          "action": "Wait 6 seconds after setting quantity to 0 again",
+          "expected": "The item is gone from the cart and the undo toast has disappeared"
+        }
+      ]
+    },
+    {
+      "id": "TC-5",
+      "title": "Negative input is rejected",
+      "type": "negative",
+      "covers": [
+        "AC-4"
+      ],
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "Type -2 into the quantity field and press Tab",
+          "expected": "The previous quantity is restored and no request is sent"
+        }
+      ]
+    }
+  ]
+}

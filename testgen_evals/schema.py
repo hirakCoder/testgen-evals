@@ -57,6 +57,8 @@ class Step:
 
 @dataclass(frozen=True)
 class TestCase:
+    __test__ = False  # keep pytest from trying to collect this dataclass
+
     id: str
     title: str
     type: str
