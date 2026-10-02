@@ -1,0 +1,1850 @@
+[
+  {
+    "story_id": "ST-001",
+    "cases": [
+      {
+        "id": "TC-1",
+        "title": "Apply valid percentage discount code reduces total before payment",
+        "type": "positive",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Shopper has items in cart with subtotal of $100.00",
+          "Discount code 'SAVE10' exists, is unexpired, and gives 10% off with no minimum order value"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to checkout page with subtotal $100.00",
+            "expected": "Checkout page displays subtotal as $100.00"
+          },
+          {
+            "action": "Enter code 'SAVE10' in the discount code field and click Apply",
+            "expected": "System shows 'SAVE10' applied and new total of $90.00 is displayed before the payment section"
+          },
+          {
+            "action": "Observe the payment section",
+            "expected": "Payment section shows the amount to be charged as $90.00, not the original $100.00"
+          }
+        ]
+      },
+      {
+        "id": "TC-2",
+        "title": "Apply valid fixed-amount discount code reduces total by exact amount",
+        "type": "positive",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Shopper has items in cart with subtotal of $50.00",
+          "Discount code 'FLAT5' exists, is unexpired, and gives $5.00 off with no minimum order value"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to checkout page with subtotal $50.00",
+            "expected": "Checkout page displays subtotal as $50.00"
+          },
+          {
+            "action": "Enter code 'FLAT5' in the discount code field and click Apply",
+            "expected": "System shows 'FLAT5' applied and new total of $45.00 is displayed before the payment section"
+          }
+        ]
+      },
+      {
+        "id": "TC-3",
+        "title": "Expired discount code is rejected and total remains unchanged",
+        "type": "negative",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "Shopper has items in cart with subtotal of $80.00",
+          "Discount code 'OLD2025' exists but expired on 2026-01-01"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to checkout page with subtotal $80.00",
+            "expected": "Checkout page displays subtotal and total as $80.00"
+          },
+          {
+            "action": "Enter code 'OLD2025' in the discount code field and click Apply",
+            "expected": "System displays message 'This code is not valid'"
+          },
+          {
+            "action": "Observe the order total",
+            "expected": "Total remains $80.00, unchanged from before attempting the code"
+          }
+        ]
+      },
+      {
+        "id": "TC-4",
+        "title": "Unknown discount code is rejected and total remains unchanged",
+        "type": "negative",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "Shopper has items in cart with subtotal of $60.00",
+          "Discount code 'FAKECODE123' does not exist in the system"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to checkout page with subtotal $60.00",
+            "expected": "Checkout page displays subtotal and total as $60.00"
+          },
+          {
+            "action": "Enter code 'FAKECODE123' in the discount code field and click Apply",
+            "expected": "System displays message 'This code is not valid' and total remains $60.00"
+          }
+        ]
+      },
+      {
+        "id": "TC-5",
+        "title": "Applying a second discount code replaces the first with notification",
+        "type": "positive",
+        "covers": [
+          "AC-3"
+        ],
+        "preconditions": [
+          "Shopper has items in cart with subtotal of $100.00",
+          "Discount code 'SAVE10' (10% off) and 'SAVE20' (20% off) both exist, unexpired, no minimum order value"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to checkout and apply code 'SAVE10'",
+            "expected": "Total updates to $90.00 and 'SAVE10' is shown as the applied code"
+          },
+          {
+            "action": "Enter code 'SAVE20' in the discount code field and click Apply",
+            "expected": "System displays a message informing the shopper that the previous code has been replaced, 'SAVE10' is no longer shown as applied, 'SAVE20' is now shown as applied, and total updates to $80.00"
+          }
+        ]
+      },
+      {
+        "id": "TC-6",
+        "title": "Discount code with minimum order value rejected when subtotal is below minimum",
+        "type": "negative",
+        "covers": [
+          "AC-4"
+        ],
+        "preconditions": [
+          "Shopper has items in cart with subtotal of $30.00",
+          "Discount code 'BIGORDER20' exists, unexpired, 20% off, with minimum order value of $75.00"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to checkout page with subtotal $30.00",
+            "expected": "Checkout page displays subtotal as $30.00"
+          },
+          {
+            "action": "Enter code 'BIGORDER20' in the discount code field and click Apply",
+            "expected": "System displays a message stating the minimum order value required is $75.00 and the code is not applied"
+          },
+          {
+            "action": "Observe the order total",
+            "expected": "Total remains $30.00, unchanged"
+          }
+        ]
+      },
+      {
+        "id": "TC-7",
+        "title": "Discount code with minimum order value accepted when subtotal equals the minimum",
+        "type": "edge",
+        "covers": [
+          "AC-1",
+          "AC-4"
+        ],
+        "preconditions": [
+          "Shopper has items in cart with subtotal of exactly $75.00",
+          "Discount code 'BIGORDER20' exists, unexpired, 20% off, with minimum order value of $75.00"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to checkout page with subtotal $75.00",
+            "expected": "Checkout page displays subtotal as $75.00"
+          },
+          {
+            "action": "Enter code 'BIGORDER20' in the discount code field and click Apply",
+            "expected": "Code is accepted, no minimum-value message is shown, and new total of $60.00 is displayed before the payment section"
+          }
+        ]
+      },
+      {
+        "id": "TC-8",
+        "title": "Removing an applied discount code restores the original total",
+        "type": "positive",
+        "covers": [
+          "AC-5"
+        ],
+        "preconditions": [
+          "Shopper has items in cart with subtotal of $100.00",
+          "Discount code 'SAVE10' exists, unexpired, 10% off, no minimum order value"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to checkout and apply code 'SAVE10'",
+            "expected": "Total updates to $90.00 and 'SAVE10' is shown as applied"
+          },
+          {
+            "action": "Click the 'Remove' option next to the applied discount code",
+            "expected": "Discount code field no longer shows an applied code"
+          },
+          {
+            "action": "Observe the order total",
+            "expected": "Total is restored to the original $100.00"
+          }
+        ]
+      }
+    ],
+    "invalid_cases": [],
+    "schema_errors": [],
+    "parse_ok": true,
+    "attempts": 1,
+    "latency_ms": 18374.0,
+    "input_tokens": 2052,
+    "output_tokens": 2300,
+    "cost_usd": 0.031204000000000003,
+    "model": "claude-sonnet-5",
+    "provider": "claude-cli"
+  },
+  {
+    "story_id": "ST-002",
+    "cases": [
+      {
+        "id": "TC-1",
+        "title": "Successfully reserve an available book",
+        "type": "positive",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Member with id 'mem-100' exists and has 0 active reservations",
+          "Book with id 'book-200' exists and is currently on loan to another member"
+        ],
+        "steps": [
+          {
+            "action": "Send POST /reservations with body {\"memberId\":\"mem-100\",\"bookId\":\"book-200\"}",
+            "expected": "Response status is 201"
+          },
+          {
+            "action": "Inspect response body",
+            "expected": "Response contains status 'queued' and a queuePosition field with a positive integer value (e.g., 1)"
+          }
+        ]
+      },
+      {
+        "id": "TC-2",
+        "title": "Sixth active reservation is rejected with limit error",
+        "type": "negative",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "Member 'mem-101' already has 5 active reservations on books 'book-301' through 'book-305'",
+          "Book 'book-306' exists and is available for reservation"
+        ],
+        "steps": [
+          {
+            "action": "Send POST /reservations with body {\"memberId\":\"mem-101\",\"bookId\":\"book-306\"}",
+            "expected": "Response status is 409"
+          },
+          {
+            "action": "Inspect response body",
+            "expected": "Response contains error code RESERVATION_LIMIT"
+          },
+          {
+            "action": "Query member 'mem-101' active reservations",
+            "expected": "Active reservation count remains 5, no new reservation was created"
+          }
+        ]
+      },
+      {
+        "id": "TC-3",
+        "title": "Reserving a book already on loan to the requesting member is rejected",
+        "type": "negative",
+        "covers": [
+          "AC-3"
+        ],
+        "preconditions": [
+          "Member 'mem-102' currently has book 'book-400' checked out on loan"
+        ],
+        "steps": [
+          {
+            "action": "Send POST /reservations with body {\"memberId\":\"mem-102\",\"bookId\":\"book-400\"}",
+            "expected": "Response status is 422"
+          },
+          {
+            "action": "Inspect response body",
+            "expected": "Response contains error code ALREADY_ON_LOAN"
+          }
+        ]
+      },
+      {
+        "id": "TC-4",
+        "title": "Reservation request for unknown book id returns 404",
+        "type": "negative",
+        "covers": [
+          "AC-4"
+        ],
+        "preconditions": [
+          "Member 'mem-103' exists and has 0 active reservations",
+          "Book id 'book-does-not-exist' does not exist in the catalog"
+        ],
+        "steps": [
+          {
+            "action": "Send POST /reservations with body {\"memberId\":\"mem-103\",\"bookId\":\"book-does-not-exist\"}",
+            "expected": "Response status is 404"
+          }
+        ]
+      },
+      {
+        "id": "TC-5",
+        "title": "Owning member cancels reservation and later members move up in queue",
+        "type": "positive",
+        "covers": [
+          "AC-5"
+        ],
+        "preconditions": [
+          "Book 'book-500' has an active reservation queue: mem-110 at position 1, mem-111 at position 2, mem-112 at position 3",
+          "Reservation id for mem-110 is 'res-700'"
+        ],
+        "steps": [
+          {
+            "action": "Send DELETE /reservations/res-700 as member 'mem-110'",
+            "expected": "Response status is 200 (or 204) indicating successful cancellation"
+          },
+          {
+            "action": "Query reservation for member 'mem-111' on book 'book-500'",
+            "expected": "mem-111's reservation now shows queuePosition 1"
+          },
+          {
+            "action": "Query reservation for member 'mem-112' on book 'book-500'",
+            "expected": "mem-112's reservation now shows queuePosition 2"
+          }
+        ]
+      },
+      {
+        "id": "TC-6",
+        "title": "Exactly five active reservations is allowed on the fifth request",
+        "type": "edge",
+        "covers": [
+          "AC-1",
+          "AC-2"
+        ],
+        "preconditions": [
+          "Member 'mem-120' has exactly 4 active reservations on books 'book-601' through 'book-604'",
+          "Book 'book-605' exists and is on loan to another member"
+        ],
+        "steps": [
+          {
+            "action": "Send POST /reservations with body {\"memberId\":\"mem-120\",\"bookId\":\"book-605\"}",
+            "expected": "Response status is 201 and response status field equals 'queued'"
+          },
+          {
+            "action": "Query member 'mem-120' active reservations",
+            "expected": "Active reservation count is exactly 5"
+          }
+        ]
+      },
+      {
+        "id": "TC-7",
+        "title": "Non-owning member cannot cancel another member's reservation",
+        "type": "negative",
+        "covers": [
+          "AC-5"
+        ],
+        "preconditions": [
+          "Book 'book-800' has an active reservation 'res-900' belonging to member 'mem-130'",
+          "Member 'mem-131' is a different registered member"
+        ],
+        "steps": [
+          {
+            "action": "Send DELETE /reservations/res-900 as member 'mem-131'",
+            "expected": "Response status is 403 (or equivalent authorization error, not 200/204)"
+          },
+          {
+            "action": "Query reservation res-900",
+            "expected": "Reservation res-900 still exists with status 'queued' and unchanged queue position"
+          }
+        ]
+      },
+      {
+        "id": "TC-8",
+        "title": "First reservation on a book with no existing queue gets position 1",
+        "type": "edge",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Member 'mem-140' exists and has 0 active reservations",
+          "Book 'book-999' exists, is on loan, and has no existing reservation queue"
+        ],
+        "steps": [
+          {
+            "action": "Send POST /reservations with body {\"memberId\":\"mem-140\",\"bookId\":\"book-999\"}",
+            "expected": "Response status is 201"
+          },
+          {
+            "action": "Inspect response body",
+            "expected": "Response contains status 'queued' and queuePosition equal to 1"
+          }
+        ]
+      }
+    ],
+    "invalid_cases": [],
+    "schema_errors": [],
+    "parse_ok": true,
+    "attempts": 1,
+    "latency_ms": 15538.0,
+    "input_tokens": 2061,
+    "output_tokens": 2043,
+    "cost_usd": 0.02867,
+    "model": "claude-sonnet-5",
+    "provider": "claude-cli"
+  },
+  {
+    "story_id": "ST-003",
+    "cases": [
+      {
+        "id": "TC-1",
+        "title": "Free cancellation within 2 minutes of driver acceptance",
+        "type": "positive",
+        "covers": [
+          "AC-1",
+          "AC-4"
+        ],
+        "preconditions": [
+          "Rider has an active ride booking",
+          "Driver has just accepted the ride"
+        ],
+        "steps": [
+          {
+            "action": "Wait 1 minute after driver acceptance, then tap 'Cancel Ride'",
+            "expected": "Cancellation confirmation dialog shows no fee amount or $0.00 fee"
+          },
+          {
+            "action": "Confirm the cancellation",
+            "expected": "Ride is cancelled with no charge applied to the rider's payment method"
+          },
+          {
+            "action": "Check the app notifications panel",
+            "expected": "An in-app notification confirming the cancellation is displayed"
+          },
+          {
+            "action": "Open ride history and locate this ride",
+            "expected": "Ride status is shown as 'cancelled'"
+          }
+        ]
+      },
+      {
+        "id": "TC-2",
+        "title": "Cancellation fee charged and disclosed after 2-minute window",
+        "type": "negative",
+        "covers": [
+          "AC-2",
+          "AC-4"
+        ],
+        "preconditions": [
+          "Rider has an active ride booking",
+          "Driver accepted the ride more than 2 minutes ago"
+        ],
+        "steps": [
+          {
+            "action": "Tap 'Cancel Ride' at 3 minutes after driver acceptance",
+            "expected": "Confirmation dialog displays a fixed cancellation fee amount (e.g. $5.00) before confirmation"
+          },
+          {
+            "action": "Confirm the cancellation",
+            "expected": "Ride is cancelled and the displayed fee is charged to the rider's payment method"
+          },
+          {
+            "action": "Check the app notifications panel",
+            "expected": "An in-app notification confirming the cancellation is displayed"
+          },
+          {
+            "action": "Open ride history and locate this ride",
+            "expected": "Ride status is shown as 'cancelled' and the fee charged is recorded against the ride"
+          }
+        ]
+      },
+      {
+        "id": "TC-3",
+        "title": "Cancel button disabled with explanatory tooltip once trip has started",
+        "type": "negative",
+        "covers": [
+          "AC-3"
+        ],
+        "preconditions": [
+          "Rider has an active ride booking",
+          "Driver has marked the trip as started"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to the active ride screen",
+            "expected": "Cancel button is visibly disabled (greyed out)"
+          },
+          {
+            "action": "Tap/hover on the disabled Cancel button",
+            "expected": "A tooltip appears explaining that cancellation is not allowed because the trip has started"
+          },
+          {
+            "action": "Attempt to trigger cancellation via a direct action (e.g. rapid tap)",
+            "expected": "No cancellation request is processed and ride remains active"
+          }
+        ]
+      },
+      {
+        "id": "TC-4",
+        "title": "Boundary check: cancellation exactly at 2-minute mark is free",
+        "type": "edge",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Rider has an active ride booking",
+          "Driver accepted the ride exactly 2 minutes ago (timer at 2:00)"
+        ],
+        "steps": [
+          {
+            "action": "Tap 'Cancel Ride' at the exact 2-minute timestamp since acceptance",
+            "expected": "Confirmation dialog shows no fee ($0.00), confirming the free window includes the 2-minute boundary"
+          },
+          {
+            "action": "Confirm the cancellation",
+            "expected": "Ride is cancelled with no charge applied"
+          }
+        ]
+      },
+      {
+        "id": "TC-5",
+        "title": "Boundary check: cancellation one second after 2-minute window incurs fee",
+        "type": "edge",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "Rider has an active ride booking",
+          "Driver accepted the ride 2 minutes and 1 second ago"
+        ],
+        "steps": [
+          {
+            "action": "Tap 'Cancel Ride' at 2:01 after acceptance",
+            "expected": "Confirmation dialog displays the fixed cancellation fee amount before confirmation"
+          },
+          {
+            "action": "Confirm the cancellation",
+            "expected": "Ride is cancelled and the fee is charged to the rider's payment method"
+          }
+        ]
+      },
+      {
+        "id": "TC-6",
+        "title": "Rider dismisses fee confirmation and ride remains active",
+        "type": "negative",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "Rider has an active ride booking",
+          "Driver accepted the ride more than 2 minutes ago"
+        ],
+        "steps": [
+          {
+            "action": "Tap 'Cancel Ride' after the 2-minute window",
+            "expected": "Confirmation dialog displays the fixed cancellation fee amount"
+          },
+          {
+            "action": "Tap 'Dismiss' or 'Go Back' instead of confirming",
+            "expected": "Ride remains active, no cancellation occurs, and no fee is charged"
+          },
+          {
+            "action": "Open ride history and locate this ride",
+            "expected": "Ride status is still 'ongoing', not 'cancelled'"
+          }
+        ]
+      }
+    ],
+    "invalid_cases": [],
+    "schema_errors": [],
+    "parse_ok": true,
+    "attempts": 1,
+    "latency_ms": 14210.0,
+    "input_tokens": 2032,
+    "output_tokens": 1748,
+    "cost_usd": 0.025604000000000002,
+    "model": "claude-sonnet-5",
+    "provider": "claude-cli"
+  },
+  {
+    "story_id": "ST-004",
+    "cases": [
+      {
+        "id": "TC-1",
+        "title": "Registered email receives working reset link",
+        "type": "positive",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "User account exists with email 'alice@example.com' and a known current password"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to the 'Forgot password' page and submit 'alice@example.com'",
+            "expected": "Confirmation message 'If an account exists for this email, a reset link has been sent' is displayed"
+          },
+          {
+            "action": "Open the email inbox for alice@example.com and locate the reset email",
+            "expected": "An email containing a password reset link is received within a few seconds"
+          },
+          {
+            "action": "Click the reset link immediately",
+            "expected": "User is taken to a 'Set new password' form and the link is accepted"
+          }
+        ]
+      },
+      {
+        "id": "TC-2",
+        "title": "Reset link rejected after 30-minute expiry",
+        "type": "edge",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "User account exists with email 'bob@example.com'",
+          "A password reset link has been generated for bob@example.com and the system clock/token timestamp shows 31 minutes have elapsed since generation"
+        ],
+        "steps": [
+          {
+            "action": "Click the reset link 31 minutes after it was generated",
+            "expected": "Page displays an error such as 'This link has expired' and does not show the new password form"
+          }
+        ]
+      },
+      {
+        "id": "TC-3",
+        "title": "Unregistered email shows identical confirmation message",
+        "type": "negative",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "No account exists with email 'nouser@example.com'"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to the 'Forgot password' page and submit 'nouser@example.com'",
+            "expected": "Confirmation message 'If an account exists for this email, a reset link has been sent' is displayed, identical in wording to the message shown for a registered email"
+          },
+          {
+            "action": "Check the inbox for nouser@example.com",
+            "expected": "No reset email is received"
+          }
+        ]
+      },
+      {
+        "id": "TC-4",
+        "title": "Reset link cannot be reused after successful reset",
+        "type": "negative",
+        "covers": [
+          "AC-3"
+        ],
+        "preconditions": [
+          "User account exists with email 'carol@example.com'",
+          "A valid, unexpired reset link has been generated for carol@example.com"
+        ],
+        "steps": [
+          {
+            "action": "Click the reset link and submit a new valid password 'NewSecurePass123'",
+            "expected": "Password reset succeeds and user is shown a success confirmation"
+          },
+          {
+            "action": "Click the same reset link a second time",
+            "expected": "Page displays the message 'This link has already been used' and does not allow setting a new password"
+          }
+        ]
+      },
+      {
+        "id": "TC-5",
+        "title": "New password rejected when shorter than 12 characters",
+        "type": "negative",
+        "covers": [
+          "AC-4"
+        ],
+        "preconditions": [
+          "User account exists with email 'dave@example.com'",
+          "A valid, unexpired reset link has been generated for dave@example.com"
+        ],
+        "steps": [
+          {
+            "action": "Click the reset link and enter new password 'Short1!' (7 characters)",
+            "expected": "Form displays validation error indicating the password must be at least 12 characters, and the password is not saved"
+          }
+        ]
+      },
+      {
+        "id": "TC-6",
+        "title": "New password rejected when matching one of the last 3 passwords",
+        "type": "negative",
+        "covers": [
+          "AC-4"
+        ],
+        "preconditions": [
+          "User account exists with email 'erin@example.com'",
+          "The account's password history contains the last 3 passwords including 'OldPassword1234'",
+          "A valid, unexpired reset link has been generated for erin@example.com"
+        ],
+        "steps": [
+          {
+            "action": "Click the reset link and enter new password 'OldPassword1234' (matches a password used within the last 3 changes)",
+            "expected": "Form displays an error stating the password must not match any of the last 3 passwords, and the password is not saved"
+          },
+          {
+            "action": "Enter a new password 'BrandNewPass9876' that does not match any of the last 3 passwords",
+            "expected": "Password reset succeeds and confirmation is displayed"
+          }
+        ]
+      },
+      {
+        "id": "TC-7",
+        "title": "All other active sessions are signed out after successful reset",
+        "type": "positive",
+        "covers": [
+          "AC-5"
+        ],
+        "preconditions": [
+          "User account exists with email 'frank@example.com'",
+          "User is currently logged in on Device A (active session) and Device B (active session)",
+          "A valid, unexpired reset link has been generated for frank@example.com"
+        ],
+        "steps": [
+          {
+            "action": "On Device B, click the reset link and submit new valid password 'ResetSession1234'",
+            "expected": "Password reset succeeds and confirmation is displayed on Device B"
+          },
+          {
+            "action": "On Device A, attempt to navigate to any authenticated page without re-logging in",
+            "expected": "Device A's session is invalid and the user is redirected to the login page"
+          }
+        ]
+      },
+      {
+        "id": "TC-8",
+        "title": "Fourth reset request within an hour is silently ignored",
+        "type": "edge",
+        "covers": [
+          "AC-6"
+        ],
+        "preconditions": [
+          "User account exists with email 'grace@example.com'",
+          "Exactly 3 reset emails have already been successfully requested for grace@example.com within the past 60 minutes"
+        ],
+        "steps": [
+          {
+            "action": "Submit the 'Forgot password' form a 4th time for 'grace@example.com' within the same 60-minute window",
+            "expected": "The same generic confirmation message is displayed as with prior requests"
+          },
+          {
+            "action": "Check the inbox for grace@example.com",
+            "expected": "No 4th reset email is delivered; only the previous 3 emails remain in the inbox"
+          }
+        ]
+      }
+    ],
+    "invalid_cases": [],
+    "schema_errors": [],
+    "parse_ok": true,
+    "attempts": 1,
+    "latency_ms": 17821.0,
+    "input_tokens": 2081,
+    "output_tokens": 2167,
+    "cost_usd": 0.029990000000000003,
+    "model": "claude-sonnet-5",
+    "provider": "claude-cli"
+  },
+  {
+    "story_id": "ST-005",
+    "cases": [
+      {
+        "id": "TC-1",
+        "title": "Upload valid files of each allowed type within size limit",
+        "type": "positive",
+        "covers": [
+          "AC-1",
+          "AC-5"
+        ],
+        "preconditions": [
+          "Customer is on an open support ticket form with no attachments yet"
+        ],
+        "steps": [
+          {
+            "action": "Attach a 2 MB PNG file 'screenshot.png'",
+            "expected": "File uploads successfully and appears in the attachment list with name 'screenshot.png' and size '2 MB'"
+          },
+          {
+            "action": "Attach a 3 MB JPG file 'error.jpg'",
+            "expected": "File uploads successfully and appears in the attachment list with name 'error.jpg' and size '3 MB'"
+          },
+          {
+            "action": "Attach a 5 MB PDF file 'invoice.pdf'",
+            "expected": "File uploads successfully and appears in the attachment list with name 'invoice.pdf' and size '5 MB'"
+          },
+          {
+            "action": "Attach a 10 KB TXT file 'log.txt'",
+            "expected": "File uploads successfully and appears in the attachment list with name 'log.txt' and size '10 KB'"
+          },
+          {
+            "action": "Review the attachment list",
+            "expected": "All 4 files are listed with correct name and size, each showing a remove control"
+          }
+        ]
+      },
+      {
+        "id": "TC-2",
+        "title": "Attempt to attach a 6th file exceeds per-ticket limit",
+        "type": "edge",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Customer has already attached 5 valid files (e.g. 5 PNGs of 1 MB each) to the ticket"
+        ],
+        "steps": [
+          {
+            "action": "Attempt to attach a 6th valid file 'extra.png' (1 MB)",
+            "expected": "Upload is blocked and a message indicates the 5-file limit per ticket has been reached"
+          },
+          {
+            "action": "Review the attachment list",
+            "expected": "Attachment list still shows exactly 5 files, 'extra.png' is not present"
+          }
+        ]
+      },
+      {
+        "id": "TC-3",
+        "title": "File exactly at 10 MB boundary is accepted",
+        "type": "edge",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Customer is on an open support ticket form with no attachments yet"
+        ],
+        "steps": [
+          {
+            "action": "Attach a PDF file exactly 10 MB in size named 'boundary.pdf'",
+            "expected": "File uploads successfully and appears in the attachment list with name 'boundary.pdf' and size '10 MB'"
+          }
+        ]
+      },
+      {
+        "id": "TC-4",
+        "title": "File over 10 MB is rejected before upload starts",
+        "type": "negative",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "Customer is on an open support ticket form with no attachments yet"
+        ],
+        "steps": [
+          {
+            "action": "Select a 10.5 MB JPG file 'bigphoto.jpg' to attach",
+            "expected": "No upload progress indicator appears and the error message 'File too large (max 10 MB)' is displayed"
+          },
+          {
+            "action": "Review the attachment list",
+            "expected": "Attachment list remains empty, 'bigphoto.jpg' is not present"
+          }
+        ]
+      },
+      {
+        "id": "TC-5",
+        "title": "File with disallowed extension is rejected",
+        "type": "negative",
+        "covers": [
+          "AC-3"
+        ],
+        "preconditions": [
+          "Customer is on an open support ticket form with no attachments yet"
+        ],
+        "steps": [
+          {
+            "action": "Select a 1 MB .EXE file 'installer.exe' to attach",
+            "expected": "The error message 'File type not supported' is displayed and no upload begins"
+          },
+          {
+            "action": "Review the attachment list",
+            "expected": "Attachment list remains empty, 'installer.exe' is not present"
+          }
+        ]
+      },
+      {
+        "id": "TC-6",
+        "title": "Cancel an in-progress upload",
+        "type": "negative",
+        "covers": [
+          "AC-4"
+        ],
+        "preconditions": [
+          "Customer is on an open support ticket form with no attachments yet",
+          "Network throttled to make a 9 MB PDF upload take several seconds"
+        ],
+        "steps": [
+          {
+            "action": "Attach a 9 MB PDF file 'report.pdf'",
+            "expected": "A progress bar is displayed showing upload progress for 'report.pdf'"
+          },
+          {
+            "action": "Click 'Cancel' on the in-progress upload before it completes",
+            "expected": "Progress bar disappears and the upload stops immediately"
+          },
+          {
+            "action": "Review the attachment list",
+            "expected": "'report.pdf' does not appear in the attachment list"
+          }
+        ]
+      },
+      {
+        "id": "TC-7",
+        "title": "Remove an uploaded file before ticket submission",
+        "type": "positive",
+        "covers": [
+          "AC-5"
+        ],
+        "preconditions": [
+          "Customer has successfully attached a 1 MB PNG file 'photo.png' to the ticket",
+          "Ticket has not yet been submitted"
+        ],
+        "steps": [
+          {
+            "action": "Verify 'photo.png' is listed in the attachment list with its size",
+            "expected": "'photo.png' is shown with name and size '1 MB'"
+          },
+          {
+            "action": "Click 'Remove' next to 'photo.png'",
+            "expected": "'photo.png' is removed from the attachment list immediately"
+          },
+          {
+            "action": "Submit the ticket",
+            "expected": "Ticket is submitted without 'photo.png' attached"
+          }
+        ]
+      }
+    ],
+    "invalid_cases": [],
+    "schema_errors": [],
+    "parse_ok": true,
+    "attempts": 1,
+    "latency_ms": 13451.0,
+    "input_tokens": 2067,
+    "output_tokens": 1877,
+    "cost_usd": 0.027034,
+    "model": "claude-sonnet-5",
+    "provider": "claude-cli"
+  },
+  {
+    "story_id": "ST-006",
+    "cases": [
+      {
+        "id": "TC-1",
+        "title": "Registration triggers verification email and check-inbox screen",
+        "type": "positive",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "User does not have an existing account with the email newuser@example.com"
+        ],
+        "steps": [
+          {
+            "action": "Register a new account with email newuser@example.com and a valid password",
+            "expected": "Registration succeeds and the app displays 'Check your inbox' message with a 'Resend' button visible"
+          },
+          {
+            "action": "Check the inbox for newuser@example.com",
+            "expected": "A verification email containing an activation link has been received"
+          }
+        ]
+      },
+      {
+        "id": "TC-2",
+        "title": "Clicking a valid verification link activates account and redirects to dashboard",
+        "type": "positive",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "User registered with email active@example.com and received an unused, unexpired verification link"
+        ],
+        "steps": [
+          {
+            "action": "Open the verification link from the email",
+            "expected": "The account is activated and the user is redirected to the dashboard"
+          },
+          {
+            "action": "Observe the dashboard page",
+            "expected": "A message 'Email verified' is displayed"
+          }
+        ]
+      },
+      {
+        "id": "TC-3",
+        "title": "Expired verification link shows error with option to resend",
+        "type": "negative",
+        "covers": [
+          "AC-3"
+        ],
+        "preconditions": [
+          "User registered with email expired@example.com more than 24 hours ago",
+          "Verification link has not been used"
+        ],
+        "steps": [
+          {
+            "action": "Open the verification link 24 hours and 1 minute after registration",
+            "expected": "An error message indicating the link has expired is displayed"
+          },
+          {
+            "action": "Observe the error screen",
+            "expected": "An option to send a new verification link is offered"
+          },
+          {
+            "action": "Select the option to send a new link",
+            "expected": "A new verification email is sent to expired@example.com"
+          }
+        ]
+      },
+      {
+        "id": "TC-4",
+        "title": "Verification link still valid just before 24-hour expiry boundary",
+        "type": "edge",
+        "covers": [
+          "AC-3"
+        ],
+        "preconditions": [
+          "User registered with email boundary@example.com 23 hours and 59 minutes ago",
+          "Verification link has not been used"
+        ],
+        "steps": [
+          {
+            "action": "Open the verification link at 23 hours 59 minutes after registration",
+            "expected": "The account is activated successfully and the user is redirected to the dashboard with 'Email verified' message, confirming the link had not yet expired"
+          }
+        ]
+      },
+      {
+        "id": "TC-5",
+        "title": "Resend button disabled for 60 seconds after use",
+        "type": "edge",
+        "covers": [
+          "AC-4"
+        ],
+        "preconditions": [
+          "User is on the 'Check your inbox' screen after registering with email resend@example.com"
+        ],
+        "steps": [
+          {
+            "action": "Click the 'Resend' button",
+            "expected": "A new verification email is sent and the 'Resend' button becomes disabled"
+          },
+          {
+            "action": "Attempt to click 'Resend' again after 30 seconds",
+            "expected": "The button remains disabled and no new email is sent"
+          },
+          {
+            "action": "Wait until 60 seconds have elapsed since the first click and check the button state",
+            "expected": "The 'Resend' button becomes enabled again"
+          },
+          {
+            "action": "Click the 'Resend' button again",
+            "expected": "A new verification email is sent successfully"
+          }
+        ]
+      },
+      {
+        "id": "TC-6",
+        "title": "Unverified user attempting login sees verification prompt instead of dashboard",
+        "type": "negative",
+        "covers": [
+          "AC-5"
+        ],
+        "preconditions": [
+          "User registered with email unverified@example.com and has not clicked the verification link"
+        ],
+        "steps": [
+          {
+            "action": "Attempt to log in with email unverified@example.com and the correct password",
+            "expected": "The user is not taken to the dashboard; instead the verification prompt ('Check your inbox' with 'Resend' button) is displayed"
+          }
+        ]
+      }
+    ],
+    "invalid_cases": [],
+    "schema_errors": [],
+    "parse_ok": true,
+    "attempts": 1,
+    "latency_ms": 10691.0,
+    "input_tokens": 2033,
+    "output_tokens": 1361,
+    "cost_usd": 0.021738,
+    "model": "claude-sonnet-5",
+    "provider": "claude-cli"
+  },
+  {
+    "story_id": "ST-007",
+    "cases": [
+      {
+        "id": "TC-1",
+        "title": "Increasing quantity updates line total and cart total instantly",
+        "type": "positive",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Cart contains 1 unit of 'Wireless Mouse' priced at $20.00",
+          "Item has available stock of 10 units",
+          "Cart total is $20.00"
+        ],
+        "steps": [
+          {
+            "action": "On the cart page, change the quantity field for 'Wireless Mouse' from 1 to 3",
+            "expected": "Line total for 'Wireless Mouse' updates to $60.00 without the page reloading"
+          },
+          {
+            "action": "Observe the cart total area after the change",
+            "expected": "Cart total updates to $60.00 instantly without a page reload"
+          }
+        ]
+      },
+      {
+        "id": "TC-2",
+        "title": "Quantity input exceeding available stock snaps to max with notice",
+        "type": "edge",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "Cart contains 1 unit of 'Desk Lamp' with available stock of 5 units"
+        ],
+        "steps": [
+          {
+            "action": "Change the quantity field for 'Desk Lamp' to 8",
+            "expected": "Quantity field snaps to 5"
+          },
+          {
+            "action": "Observe the cart for a notice message",
+            "expected": "A notice is displayed stating 'Only 5 in stock' or equivalent stock-limit message"
+          },
+          {
+            "action": "Check the line total for 'Desk Lamp'",
+            "expected": "Line total reflects quantity of 5 units, not 8"
+          }
+        ]
+      },
+      {
+        "id": "TC-3",
+        "title": "Setting quantity to exactly the available stock is accepted",
+        "type": "edge",
+        "covers": [
+          "AC-2",
+          "AC-1"
+        ],
+        "preconditions": [
+          "Cart contains 1 unit of 'Water Bottle' priced at $10.00 with available stock of 4 units"
+        ],
+        "steps": [
+          {
+            "action": "Change the quantity field for 'Water Bottle' to 4",
+            "expected": "Quantity field accepts 4 without snapping and no stock-limit notice is shown"
+          },
+          {
+            "action": "Observe the line total",
+            "expected": "Line total updates to $40.00 without a page reload"
+          }
+        ]
+      },
+      {
+        "id": "TC-4",
+        "title": "Setting quantity to 0 shows Undo toast and removes item after 5 seconds",
+        "type": "positive",
+        "covers": [
+          "AC-3"
+        ],
+        "preconditions": [
+          "Cart contains 1 unit of 'Phone Case' priced at $15.00 along with other items"
+        ],
+        "steps": [
+          {
+            "action": "Change the quantity field for 'Phone Case' to 0",
+            "expected": "An 'Undo' toast appears on screen"
+          },
+          {
+            "action": "Wait 5 seconds without clicking Undo",
+            "expected": "The toast disappears and 'Phone Case' is removed from the cart"
+          },
+          {
+            "action": "Check the cart total",
+            "expected": "Cart total no longer includes 'Phone Case' line amount"
+          }
+        ]
+      },
+      {
+        "id": "TC-5",
+        "title": "Clicking Undo within 5 seconds restores the removed item",
+        "type": "edge",
+        "covers": [
+          "AC-3"
+        ],
+        "preconditions": [
+          "Cart contains 1 unit of 'Notebook' priced at $5.00"
+        ],
+        "steps": [
+          {
+            "action": "Change the quantity field for 'Notebook' to 0",
+            "expected": "An 'Undo' toast appears on screen"
+          },
+          {
+            "action": "Click 'Undo' within the 5-second window (e.g., at 2 seconds)",
+            "expected": "'Notebook' remains in the cart with its previous quantity of 1 and the toast disappears"
+          },
+          {
+            "action": "Check the cart total",
+            "expected": "Cart total includes 'Notebook' at $5.00"
+          }
+        ]
+      },
+      {
+        "id": "TC-6",
+        "title": "Non-numeric input is rejected and previous quantity is restored",
+        "type": "negative",
+        "covers": [
+          "AC-4"
+        ],
+        "preconditions": [
+          "Cart contains 2 units of 'Keyboard' priced at $30.00 each (line total $60.00)"
+        ],
+        "steps": [
+          {
+            "action": "Enter 'abc' into the quantity field for 'Keyboard' and confirm/blur the field",
+            "expected": "Input is rejected and the quantity field reverts to 2"
+          },
+          {
+            "action": "Check the line total for 'Keyboard'",
+            "expected": "Line total remains $60.00"
+          }
+        ]
+      },
+      {
+        "id": "TC-7",
+        "title": "Negative numeric input is rejected and previous quantity is restored",
+        "type": "negative",
+        "covers": [
+          "AC-4"
+        ],
+        "preconditions": [
+          "Cart contains 3 units of 'Charger Cable' priced at $8.00 each (line total $24.00)"
+        ],
+        "steps": [
+          {
+            "action": "Enter '-2' into the quantity field for 'Charger Cable' and confirm/blur the field",
+            "expected": "Input is rejected and the quantity field reverts to 3"
+          },
+          {
+            "action": "Check the line total for 'Charger Cable'",
+            "expected": "Line total remains $24.00"
+          },
+          {
+            "action": "Check the cart total",
+            "expected": "Cart total is unchanged from before the attempted edit"
+          }
+        ]
+      }
+    ],
+    "invalid_cases": [],
+    "schema_errors": [],
+    "parse_ok": true,
+    "attempts": 1,
+    "latency_ms": 13518.0,
+    "input_tokens": 1998,
+    "output_tokens": 1824,
+    "cost_usd": 0.026228,
+    "model": "claude-sonnet-5",
+    "provider": "claude-cli"
+  },
+  {
+    "story_id": "ST-008",
+    "cases": [
+      {
+        "id": "TC-1",
+        "title": "Filter products using valid min and max price range",
+        "type": "positive",
+        "covers": [
+          "AC-1",
+          "AC-4"
+        ],
+        "preconditions": [
+          "Catalog page is loaded with products priced between $5 and $500"
+        ],
+        "steps": [
+          {
+            "action": "Enter '20' in the minimum price field",
+            "expected": "Minimum field displays '20'"
+          },
+          {
+            "action": "Enter '100' in the maximum price field and apply the filter",
+            "expected": "Result list shows only products priced from $20 to $100 inclusive, including any product priced exactly at $20 or $100"
+          },
+          {
+            "action": "Inspect the browser URL query string",
+            "expected": "URL contains query parameters reflecting minPrice=20 and maxPrice=100"
+          }
+        ]
+      },
+      {
+        "id": "TC-2",
+        "title": "Reject filter when minimum price exceeds maximum price",
+        "type": "negative",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "Catalog page is loaded with default unfiltered product list"
+        ],
+        "steps": [
+          {
+            "action": "Enter '150' in the minimum price field",
+            "expected": "Minimum field displays '150'"
+          },
+          {
+            "action": "Enter '50' in the maximum price field and apply the filter",
+            "expected": "Inline error message 'Min must be less than or equal to max' is displayed and product list remains unfiltered"
+          },
+          {
+            "action": "Inspect the browser URL query string",
+            "expected": "URL does not contain minPrice or maxPrice parameters"
+          }
+        ]
+      },
+      {
+        "id": "TC-3",
+        "title": "Apply filter with only minimum price set",
+        "type": "positive",
+        "covers": [
+          "AC-3",
+          "AC-4"
+        ],
+        "preconditions": [
+          "Catalog page is loaded with products priced between $5 and $500"
+        ],
+        "steps": [
+          {
+            "action": "Enter '75' in the minimum price field, leave maximum price field empty",
+            "expected": "Minimum field shows '75', maximum field remains blank"
+          },
+          {
+            "action": "Apply the filter",
+            "expected": "Result list shows only products priced $75 or higher, with no upper limit applied"
+          },
+          {
+            "action": "Inspect the browser URL query string",
+            "expected": "URL contains minPrice=75 and does not contain a maxPrice parameter"
+          }
+        ]
+      },
+      {
+        "id": "TC-4",
+        "title": "Apply filter with only maximum price set",
+        "type": "positive",
+        "covers": [
+          "AC-3",
+          "AC-4"
+        ],
+        "preconditions": [
+          "Catalog page is loaded with products priced between $5 and $500"
+        ],
+        "steps": [
+          {
+            "action": "Leave minimum price field empty, enter '30' in the maximum price field",
+            "expected": "Minimum field remains blank, maximum field shows '30'"
+          },
+          {
+            "action": "Apply the filter",
+            "expected": "Result list shows only products priced $30 or lower, with no lower limit applied"
+          },
+          {
+            "action": "Inspect the browser URL query string",
+            "expected": "URL contains maxPrice=30 and does not contain a minPrice parameter"
+          }
+        ]
+      },
+      {
+        "id": "TC-5",
+        "title": "Reload shared URL with price range parameters restores filtered view",
+        "type": "positive",
+        "covers": [
+          "AC-1",
+          "AC-4"
+        ],
+        "preconditions": [
+          "A catalog URL with query parameters minPrice=20&maxPrice=100 is known to be shareable"
+        ],
+        "steps": [
+          {
+            "action": "Navigate directly to the catalog URL with minPrice=20 and maxPrice=100 in a fresh browser session",
+            "expected": "Page loads with the minimum field pre-filled as '20' and maximum field pre-filled as '100'"
+          },
+          {
+            "action": "Observe the displayed result list",
+            "expected": "Result list shows only products priced from $20 to $100 inclusive, matching the filter encoded in the URL"
+          }
+        ]
+      },
+      {
+        "id": "TC-6",
+        "title": "Clear price filter restores full list and removes URL parameters",
+        "type": "positive",
+        "covers": [
+          "AC-5"
+        ],
+        "preconditions": [
+          "Catalog page is loaded with an active price filter of minPrice=20 and maxPrice=100 applied, reflected in the URL"
+        ],
+        "steps": [
+          {
+            "action": "Click the 'Clear filter' control",
+            "expected": "Minimum and maximum price fields are emptied"
+          },
+          {
+            "action": "Observe the result list",
+            "expected": "Full unfiltered product list is displayed, including products outside the previous $20-$100 range"
+          },
+          {
+            "action": "Inspect the browser URL query string",
+            "expected": "URL no longer contains minPrice or maxPrice parameters"
+          }
+        ]
+      },
+      {
+        "id": "TC-7",
+        "title": "Boundary prices exactly at min and max are included in results",
+        "type": "edge",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Catalog contains a product priced exactly $20 and another priced exactly $100, plus products at $19 and $101"
+        ],
+        "steps": [
+          {
+            "action": "Enter '20' as minimum price and '100' as maximum price, then apply the filter",
+            "expected": "Fields show '20' and '100' respectively"
+          },
+          {
+            "action": "Observe the result list",
+            "expected": "The $20 and $100 products both appear in the results, while the $19 and $101 products do not appear"
+          }
+        ]
+      },
+      {
+        "id": "TC-8",
+        "title": "Equal minimum and maximum price values are accepted",
+        "type": "edge",
+        "covers": [
+          "AC-1",
+          "AC-2"
+        ],
+        "preconditions": [
+          "Catalog contains at least one product priced exactly $50"
+        ],
+        "steps": [
+          {
+            "action": "Enter '50' in the minimum price field and '50' in the maximum price field",
+            "expected": "Both fields display '50'"
+          },
+          {
+            "action": "Apply the filter",
+            "expected": "No inline error is shown, and only products priced exactly $50 are displayed in the result list"
+          }
+        ]
+      }
+    ],
+    "invalid_cases": [],
+    "schema_errors": [],
+    "parse_ok": true,
+    "attempts": 1,
+    "latency_ms": 15830.0,
+    "input_tokens": 2039,
+    "output_tokens": 2043,
+    "cost_usd": 0.028582000000000003,
+    "model": "claude-sonnet-5",
+    "provider": "claude-cli"
+  },
+  {
+    "story_id": "ST-009",
+    "cases": [
+      {
+        "id": "TC-1",
+        "title": "Complete 2FA setup with correct code from authenticator app",
+        "type": "positive",
+        "covers": [
+          "AC-1",
+          "AC-3"
+        ],
+        "preconditions": [
+          "User is logged in",
+          "User does not have 2FA enabled",
+          "User has an authenticator app installed"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to account security settings and click 'Enable Two-Factor Authentication'",
+            "expected": "A QR code and a text secret (manual entry key) are displayed on the setup page"
+          },
+          {
+            "action": "Scan the QR code with the authenticator app and enter the resulting current 6-digit code into the setup form",
+            "expected": "Setup is marked complete and a confirmation message 'Two-factor authentication enabled' is shown"
+          },
+          {
+            "action": "Observe the page immediately after setup completes",
+            "expected": "8 single-use recovery codes are displayed to the user"
+          },
+          {
+            "action": "Attempt to navigate away from the page without checking the 'I have saved my recovery codes' confirmation box",
+            "expected": "Navigation is blocked and a warning prompts the user to confirm they saved the recovery codes"
+          },
+          {
+            "action": "Check the confirmation box and then navigate away",
+            "expected": "Navigation succeeds and 2FA is fully enabled on the account"
+          }
+        ]
+      },
+      {
+        "id": "TC-2",
+        "title": "Three consecutive incorrect codes abort setup and regenerate secret",
+        "type": "negative",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "User is logged in",
+          "User does not have 2FA enabled",
+          "User has started 2FA setup and sees a QR code/secret"
+        ],
+        "steps": [
+          {
+            "action": "Enter an incorrect 6-digit code, e.g. '000000', and submit",
+            "expected": "An error message states the code is incorrect and setup remains in progress"
+          },
+          {
+            "action": "Enter a second incorrect 6-digit code, e.g. '111111', and submit",
+            "expected": "An error message states the code is incorrect and setup remains in progress"
+          },
+          {
+            "action": "Enter a third incorrect 6-digit code, e.g. '222222', and submit",
+            "expected": "Setup is aborted with a message indicating too many failed attempts, and the original secret is invalidated"
+          },
+          {
+            "action": "Click 'Retry setup' to start the process again",
+            "expected": "A new QR code and new text secret are generated, different from the original secret"
+          }
+        ]
+      },
+      {
+        "id": "TC-3",
+        "title": "Login requires valid app code after password when 2FA is enabled",
+        "type": "positive",
+        "covers": [
+          "AC-4"
+        ],
+        "preconditions": [
+          "User has 2FA already enabled on their account with a known authenticator secret"
+        ],
+        "steps": [
+          {
+            "action": "Enter correct username and password on the login page and submit",
+            "expected": "User is prompted for a second-factor code and is not yet granted access"
+          },
+          {
+            "action": "Enter the current correct 6-digit code from the authenticator app and submit",
+            "expected": "Login succeeds and the user lands on their account dashboard"
+          }
+        ]
+      },
+      {
+        "id": "TC-4",
+        "title": "Login with recovery code succeeds once but is rejected on reuse",
+        "type": "negative",
+        "covers": [
+          "AC-4"
+        ],
+        "preconditions": [
+          "User has 2FA enabled",
+          "User has a list of 8 unused recovery codes from setup"
+        ],
+        "steps": [
+          {
+            "action": "Enter correct username and password, then on the second-factor prompt enter one of the unused recovery codes",
+            "expected": "Login succeeds and the user lands on their account dashboard"
+          },
+          {
+            "action": "Log out and attempt to log in again with correct username and password",
+            "expected": "User is prompted for a second-factor code"
+          },
+          {
+            "action": "Enter the same recovery code used in step 1",
+            "expected": "The code is rejected with an error stating the recovery code has already been used, and login is not completed"
+          }
+        ]
+      },
+      {
+        "id": "TC-5",
+        "title": "Disable 2FA requires both current password and valid app code",
+        "type": "positive",
+        "covers": [
+          "AC-5"
+        ],
+        "preconditions": [
+          "User is logged in with an active session",
+          "User has 2FA enabled"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to account security settings and click 'Disable Two-Factor Authentication'",
+            "expected": "A form appears requesting the current password and a 6-digit app code"
+          },
+          {
+            "action": "Enter the correct current password and a correct current 6-digit code from the authenticator app, then submit",
+            "expected": "2FA is disabled and a confirmation message 'Two-factor authentication disabled' is shown"
+          },
+          {
+            "action": "Log out and log back in with username and password only",
+            "expected": "Login succeeds without any second-factor prompt"
+          }
+        ]
+      },
+      {
+        "id": "TC-6",
+        "title": "Disable 2FA fails with incorrect password even if app code is correct",
+        "type": "negative",
+        "covers": [
+          "AC-5"
+        ],
+        "preconditions": [
+          "User is logged in with an active session",
+          "User has 2FA enabled"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to the disable 2FA form and enter an incorrect password along with a correct current 6-digit app code, then submit",
+            "expected": "Request is rejected with an 'incorrect password' error and 2FA remains enabled"
+          },
+          {
+            "action": "Enter the correct password along with an incorrect 6-digit app code, then submit",
+            "expected": "Request is rejected with an 'incorrect code' error and 2FA remains enabled"
+          }
+        ]
+      }
+    ],
+    "invalid_cases": [],
+    "schema_errors": [],
+    "parse_ok": true,
+    "attempts": 1,
+    "latency_ms": 14948.0,
+    "input_tokens": 2061,
+    "output_tokens": 1888,
+    "cost_usd": 0.027120000000000002,
+    "model": "claude-sonnet-5",
+    "provider": "claude-cli"
+  },
+  {
+    "story_id": "ST-010",
+    "cases": [
+      {
+        "id": "TC-1",
+        "title": "Request return within 30 days with reason and comment",
+        "type": "positive",
+        "covers": [
+          "AC-1",
+          "AC-2",
+          "AC-4"
+        ],
+        "preconditions": [
+          "Customer is logged in",
+          "Order contains an item delivered 10 days ago",
+          "Item is not marked 'final sale'",
+          "No existing return request exists for the item"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to the order detail page for the delivered item",
+            "expected": "'Return' action button is visible for the item"
+          },
+          {
+            "action": "Click 'Return' and select reason 'Item damaged' from the reason list",
+            "expected": "Reason 'Item damaged' is selected and highlighted in the form"
+          },
+          {
+            "action": "Enter a 200-character comment in the optional comment field",
+            "expected": "Comment text is accepted and character counter shows 200/500"
+          },
+          {
+            "action": "Click 'Submit Return Request'",
+            "expected": "Confirmation screen displays a generated return id and status 'requested'"
+          },
+          {
+            "action": "Check the customer's registered email inbox",
+            "expected": "An email containing a prepaid shipping label (PDF/link) has been received"
+          }
+        ]
+      },
+      {
+        "id": "TC-2",
+        "title": "Return action hidden after 30-day window with explanation",
+        "type": "negative",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Customer is logged in",
+          "Order contains an item delivered exactly 31 days ago",
+          "Item is not marked 'final sale'"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to the order detail page for the item delivered 31 days ago",
+            "expected": "'Return' action button is not displayed for the item"
+          },
+          {
+            "action": "Click on the item's status/info area",
+            "expected": "A message is shown explaining that the 30-day return window has expired"
+          }
+        ]
+      },
+      {
+        "id": "TC-3",
+        "title": "Return action remains available on the last day of the 30-day window",
+        "type": "edge",
+        "covers": [
+          "AC-1"
+        ],
+        "preconditions": [
+          "Customer is logged in",
+          "Order contains an item delivered exactly 30 days ago",
+          "Item is not marked 'final sale'"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to the order detail page for the item delivered 30 days ago",
+            "expected": "'Return' action button is visible and clickable for the item"
+          },
+          {
+            "action": "Click 'Return', select a reason, and submit without a comment",
+            "expected": "Return request is created successfully with status 'requested' and a return id is shown"
+          }
+        ]
+      },
+      {
+        "id": "TC-4",
+        "title": "Final sale item never shows Return action",
+        "type": "negative",
+        "covers": [
+          "AC-3"
+        ],
+        "preconditions": [
+          "Customer is logged in",
+          "Order contains an item marked 'final sale', delivered 5 days ago"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to the order detail page for the final-sale item",
+            "expected": "'Return' action button is not displayed for the item, regardless of delivery date"
+          }
+        ]
+      },
+      {
+        "id": "TC-5",
+        "title": "Comment exceeding 500 characters is rejected",
+        "type": "negative",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "Customer is logged in",
+          "Order contains an item delivered 5 days ago",
+          "Item is not marked 'final sale'",
+          "No existing return request exists for the item"
+        ],
+        "steps": [
+          {
+            "action": "Click 'Return' and select a reason from the list",
+            "expected": "Reason is selected in the form"
+          },
+          {
+            "action": "Enter 501 characters into the optional comment field",
+            "expected": "Input is blocked at 500 characters or a validation error 'Comment cannot exceed 500 characters' is displayed"
+          },
+          {
+            "action": "Attempt to click 'Submit Return Request'",
+            "expected": "Submission is blocked and the request is not created"
+          }
+        ]
+      },
+      {
+        "id": "TC-6",
+        "title": "Submitting return request without selecting a reason is rejected",
+        "type": "negative",
+        "covers": [
+          "AC-2"
+        ],
+        "preconditions": [
+          "Customer is logged in",
+          "Order contains an item delivered 5 days ago",
+          "Item is not marked 'final sale'",
+          "No existing return request exists for the item"
+        ],
+        "steps": [
+          {
+            "action": "Click 'Return' and leave the reason field unselected",
+            "expected": "No reason is pre-selected in the list"
+          },
+          {
+            "action": "Click 'Submit Return Request'",
+            "expected": "Validation error 'Please select a reason' is shown and no return request is created"
+          }
+        ]
+      },
+      {
+        "id": "TC-7",
+        "title": "Second return request on same item shows the existing return",
+        "type": "edge",
+        "covers": [
+          "AC-5"
+        ],
+        "preconditions": [
+          "Customer is logged in",
+          "Item was delivered 5 days ago and already has an open return request with status 'requested' and return id RTN-1001"
+        ],
+        "steps": [
+          {
+            "action": "Navigate to the order detail page for the item with the existing open return",
+            "expected": "'Return' action button is not shown; instead a 'View Return' or status indicator is shown"
+          },
+          {
+            "action": "Click the status indicator or 'View Return' link",
+            "expected": "The existing return RTN-1001 with status 'requested' is displayed instead of a new return form"
+          }
+        ]
+      }
+    ],
+    "invalid_cases": [],
+    "schema_errors": [],
+    "parse_ok": true,
+    "attempts": 1,
+    "latency_ms": 15438.0,
+    "input_tokens": 2042,
+    "output_tokens": 1878,
+    "cost_usd": 0.026944,
+    "model": "claude-sonnet-5",
+    "provider": "claude-cli"
+  }
+]

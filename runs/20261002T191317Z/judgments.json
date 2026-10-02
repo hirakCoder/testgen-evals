@@ -1,0 +1,1028 @@
+{
+  "judgments": [
+    {
+      "story_id": "ST-001",
+      "case_id": "TC-7",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "independence": 5
+      },
+      "rationale": "Correct at-minimum boundary with an accurate $60.00 result, but never tests a below-minimum subtotal or that the rejection message states the minimum, as AC-4 requires.",
+      "parse_ok": true,
+      "latency_ms": 5214.0,
+      "cost_usd": 0.026648,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-002",
+      "case_id": "TC-7",
+      "order": "story_first",
+      "scores": {
+        "correctness": 2,
+        "completeness": 2,
+        "clarity": 3,
+        "independence": 4
+      },
+      "rationale": "AC-5 does not specify non-owner behaviour, so the 403 is assumed. The case never verifies owner cancellation or queue reordering, and the query method and position are vague.",
+      "parse_ok": true,
+      "latency_ms": 4019.0,
+      "cost_usd": 0.019497,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-003",
+      "case_id": "TC-5",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 3,
+        "independence": 4
+      },
+      "rationale": "Correct AC-2 boundary test, but the expected fee amount and how to verify the charge are unspecified, and preconditions omit that the trip hasn't started.",
+      "parse_ok": true,
+      "latency_ms": 4502.0,
+      "cost_usd": 0.019321,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-004",
+      "case_id": "TC-5",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 2,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Correctly checks the short-password rejection, but omits the 11/12 boundary and the last-3-passwords rule claimed under AC-4; 'not saved' lacks a verification method.",
+      "parse_ok": true,
+      "latency_ms": 3695.0,
+      "cost_usd": 0.018713,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-005",
+      "case_id": "TC-6",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Covers AC-4's progress bar, cancel and non-attachment, but 'disappears immediately' goes beyond the spec and attachment is never confirmed after submission.",
+      "parse_ok": true,
+      "latency_ms": 3685.0,
+      "cost_usd": 0.020937,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-006",
+      "case_id": "TC-3",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Matches AC-3 with a good just-past-expiry boundary, but doesn't confirm the account stays unactivated or explain how to simulate elapsed time.",
+      "parse_ok": true,
+      "latency_ms": 4399.0,
+      "cost_usd": 0.019785,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-007",
+      "case_id": "TC-5",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Undo restoring quantity 1 is a reasonable inference, but the case never verifies the 5-second toast duration or removal without undo; cart total is vague.",
+      "parse_ok": true,
+      "latency_ms": 4263.0,
+      "cost_usd": 0.020765,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-008",
+      "case_id": "TC-2",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Error and unapplied filter match AC-2, but it assumes minPrice/maxPrice parameter names the story never specifies, omits the min-equals-max boundary, and leaves 'unfiltered' loosely defined.",
+      "parse_ok": true,
+      "latency_ms": 5266.0,
+      "cost_usd": 0.022129000000000003,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-009",
+      "case_id": "TC-6",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 4,
+        "clarity": 3,
+        "independence": 4
+      },
+      "rationale": "Correctly tests both AC-5 rejection paths, but asserts exact error messages the story doesn't specify, omits form location, and never verifies 2FA still enforced at login.",
+      "parse_ok": true,
+      "latency_ms": 4357.0,
+      "cost_usd": 0.020104999999999998,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-010",
+      "case_id": "TC-2",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 3,
+        "clarity": 3,
+        "independence": 5
+      },
+      "rationale": "Correctly checks day-31 hiding and explanation but skips the day-30 boundary, and the vague 'status/info area' click step assumes UI placement the story does not specify.",
+      "parse_ok": true,
+      "latency_ms": 4432.0,
+      "cost_usd": 0.019725,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-001",
+      "case_id": "TC-8",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 5,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Fully exercises AC-5 with concrete data and stated preconditions, but it assumes total equals subtotal by ignoring tax and shipping, and presumes a 'Remove' control.",
+      "parse_ok": true,
+      "latency_ms": 3976.0,
+      "cost_usd": 0.020309,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-002",
+      "case_id": "TC-8",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Checks 201, 'queued' and position 1 per AC-1, but assumes field name queuePosition and never says the book is loaned to someone other than mem-140.",
+      "parse_ok": true,
+      "latency_ms": 4206.0,
+      "cost_usd": 0.020785,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-003",
+      "case_id": "TC-2",
+      "order": "story_first",
+      "scores": {
+        "correctness": 3,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Covers fee disclosure, charge, notification and status, but asserts the fee is recorded in history (unspecified), mislabels type as negative, and omits the boundary check.",
+      "parse_ok": true,
+      "latency_ms": 6048.0,
+      "cost_usd": 0.024857,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-004",
+      "case_id": "TC-8",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Correctly verifies the fourth request is silently ignored; omits the hour-window reset boundary and assumes an otherwise empty inbox with an unstated setup method.",
+      "parse_ok": true,
+      "latency_ms": 4462.0,
+      "cost_usd": 0.020312999999999998,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-005",
+      "case_id": "TC-1",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 2,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Covers all four allowed types, but skips the 10 MB boundary and five-file limit, and never actually removes a file for AC-5; the displayed size format is assumed.",
+      "parse_ok": true,
+      "latency_ms": 6331.0,
+      "cost_usd": 0.021469000000000002,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-006",
+      "case_id": "TC-4",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 2,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "The valid-before-expiry expectation follows from AC-2/AC-3, but it skips the expired-link error and resend offer, and gives no method to simulate elapsed time.",
+      "parse_ok": true,
+      "latency_ms": 3730.0,
+      "cost_usd": 0.018845,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-007",
+      "case_id": "TC-4",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Matches AC-3, but never checks the item stays until the toast expires or the 5-second duration; the 'other items' and cart total values are unspecified.",
+      "parse_ok": true,
+      "latency_ms": 3726.0,
+      "cost_usd": 0.019901000000000002,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-008",
+      "case_id": "TC-6",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 4,
+        "clarity": 3,
+        "independence": 4
+      },
+      "rationale": "Covers AC-5's list restoration and URL cleanup, but the field-emptying expectation is unspecified and there is no baseline count or catalog data for verifying the full list.",
+      "parse_ok": true,
+      "latency_ms": 3866.0,
+      "cost_usd": 0.019677,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-009",
+      "case_id": "TC-3",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 2,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Tests the app-code login path correctly, but AC-4's unused-recovery-code acceptance and used-recovery-code rejection are untested. The dashboard landing expectation is assumed.",
+      "parse_ok": true,
+      "latency_ms": 4005.0,
+      "cost_usd": 0.019725,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-010",
+      "case_id": "TC-7",
+      "order": "story_first",
+      "scores": {
+        "correctness": 2,
+        "completeness": 2,
+        "clarity": 3,
+        "independence": 4
+      },
+      "rationale": "AC-5 says a second attempt shows the existing return, but the case invents a hidden Return button and never attempts a second request; 'View Return or indicator' is ambiguous.",
+      "parse_ok": true,
+      "latency_ms": 3810.0,
+      "cost_usd": 0.019777,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-001",
+      "case_id": "TC-4",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "independence": 5
+      },
+      "rationale": "Accurately verifies unknown-code rejection, message and unchanged total, but AC-2 also requires expired codes to be rejected, which this case does not exercise.",
+      "parse_ok": true,
+      "latency_ms": 2624.0,
+      "cost_usd": 0.017077,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-002",
+      "case_id": "TC-3",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "independence": 4
+      },
+      "rationale": "Checks the 422 status and ALREADY_ON_LOAN code; does not confirm no reservation was created or that mem-102 is under the reservation limit.",
+      "parse_ok": true,
+      "latency_ms": 3830.0,
+      "cost_usd": 0.018945,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-003",
+      "case_id": "TC-3",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Accurately tests disabled button and tooltip; 'rapid tap' step is vague, tooltip text unspecified, and how to set trip-started state is not described.",
+      "parse_ok": true,
+      "latency_ms": 2061.0,
+      "cost_usd": 0.016193,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-004",
+      "case_id": "TC-6",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Tests the last-3-password history rule, but claims AC-4 without checking the 12-character minimum or boundary; the history setup and error wording are loosely specified.",
+      "parse_ok": true,
+      "latency_ms": 3614.0,
+      "cost_usd": 0.020229,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-005",
+      "case_id": "TC-3",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 2,
+        "clarity": 3,
+        "independence": 5
+      },
+      "rationale": "Valid inclusive 10 MB boundary check, but it leaves 'exactly 10 MB' undefined (MB vs MiB), checks untagged AC-5 listing, and skips other types and the 5-file limit.",
+      "parse_ok": true,
+      "latency_ms": 5791.0,
+      "cost_usd": 0.022597,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-006",
+      "case_id": "TC-6",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Accurately targets AC-5. It assumes the prompt matches AC-1's 'Check your inbox' screen, and the precondition omits the actual password, a minor gap.",
+      "parse_ok": true,
+      "latency_ms": 4034.0,
+      "cost_usd": 0.019269,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-007",
+      "case_id": "TC-6",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Non-numeric rejection and restore are verified correctly, but negative input from AC-4 is untested, and 'confirm/blur' leaves the commit action slightly ambiguous.",
+      "parse_ok": true,
+      "latency_ms": 2885.0,
+      "cost_usd": 0.017529,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-008",
+      "case_id": "TC-4",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 3,
+        "clarity": 3,
+        "independence": 4
+      },
+      "rationale": "Correct AC-3 logic, but it assumes the unspecified 'maxPrice' param name, omits AC-4 reload/share verification, and lacks concrete product data, including a $30 boundary item.",
+      "parse_ok": true,
+      "latency_ms": 3709.0,
+      "cost_usd": 0.020445,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-009",
+      "case_id": "TC-1",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Covers AC-1 and AC-3 well, but invents an exact confirmation message and checkbox UI, never checks the single-use property, and leaves 'navigate away' vague.",
+      "parse_ok": true,
+      "latency_ms": 4635.0,
+      "cost_usd": 0.022477,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-010",
+      "case_id": "TC-5",
+      "order": "story_first",
+      "scores": {
+        "correctness": 3,
+        "completeness": 2,
+        "clarity": 3,
+        "independence": 5
+      },
+      "rationale": "Invents an exact error message, and step 3 contradicts the truncation branch. It skips the required reason, the 500-character boundary and the optional comment; the either-or expectation is ambiguous.",
+      "parse_ok": true,
+      "latency_ms": 4332.0,
+      "cost_usd": 0.021829,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-001",
+      "case_id": "TC-1",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Accurately verifies percentage reduction shown before payment, but omits the fixed-amount variant of AC-1 and assumes no tax or shipping affects the total.",
+      "parse_ok": true,
+      "latency_ms": 2981.0,
+      "cost_usd": 0.019361,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-002",
+      "case_id": "TC-4",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 5,
+        "clarity": 5,
+        "independence": 5
+      },
+      "rationale": "Directly verifies AC-4's 404 for an unknown book id, with concrete member and book data and fully stated preconditions; the criterion requires nothing more.",
+      "parse_ok": true,
+      "latency_ms": 2774.0,
+      "cost_usd": 0.017233000000000002,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-003",
+      "case_id": "TC-1",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Covers AC-1 and AC-4 accurately, but skips the 2-minute boundary, leaves how to verify no payment charge unstated, and lacks concrete account and payment data.",
+      "parse_ok": true,
+      "latency_ms": 3751.0,
+      "cost_usd": 0.021077,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-004",
+      "case_id": "TC-7",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Correctly targets AC-5, but it checks only one other session, never states what happens to Device B's own session, and assumes a login redirect.",
+      "parse_ok": true,
+      "latency_ms": 5307.0,
+      "cost_usd": 0.022237,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-005",
+      "case_id": "TC-4",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 5,
+        "clarity": 5,
+        "independence": 4
+      },
+      "rationale": "Checks AC-2's message, the pre-upload rejection (no progress bar) and non-attachment with concrete data; preconditions omit preparing the 10.5 MB test file.",
+      "parse_ok": true,
+      "latency_ms": 5358.0,
+      "cost_usd": 0.022561,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-006",
+      "case_id": "TC-5",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Expectations match AC-4, but the case never checks the button disables again after the second click ('each use'). It also doesn't say how to confirm emails were sent.",
+      "parse_ok": true,
+      "latency_ms": 3182.0,
+      "cost_usd": 0.020180999999999998,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-007",
+      "case_id": "TC-3",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Valid boundary check at stock maximum, but it never tests exceeding stock for AC-2 and omits verifying the cart total required by AC-1.",
+      "parse_ok": true,
+      "latency_ms": 5063.0,
+      "cost_usd": 0.017861000000000002,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-008",
+      "case_id": "TC-1",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 3,
+        "clarity": 3,
+        "independence": 4
+      },
+      "rationale": "AC-4 reload/share is never verified, products priced exactly $20 and $100 are not guaranteed, and URL parameter names are assumed rather than specified.",
+      "parse_ok": true,
+      "latency_ms": 3379.0,
+      "cost_usd": 0.020197,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-009",
+      "case_id": "TC-4",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Checks recovery-code success and reuse rejection, but skips the app-code path and asserts an error message and dashboard landing the story never specifies.",
+      "parse_ok": true,
+      "latency_ms": 3796.0,
+      "cost_usd": 0.020385,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-010",
+      "case_id": "TC-4",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Delivering 5 days ago keeps the item in the return window, isolating the final-sale rule. 'Regardless of delivery date' is unverifiable in one step, and there's no non-final-sale control.",
+      "parse_ok": true,
+      "latency_ms": 4319.0,
+      "cost_usd": 0.019709,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-001",
+      "case_id": "TC-3",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "independence": 5
+      },
+      "rationale": "Accurately tests the expired-code rejection message and unchanged total, but AC-2 also names unknown codes, which this case never exercises.",
+      "parse_ok": true,
+      "latency_ms": 2492.0,
+      "cost_usd": 0.017697,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-002",
+      "case_id": "TC-6",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Valid boundary test for the 5-reservation limit, but it skips the queue position from AC-1 and does not name the endpoint used to query active reservations.",
+      "parse_ok": true,
+      "latency_ms": 4428.0,
+      "cost_usd": 0.021301,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-003",
+      "case_id": "TC-4",
+      "order": "story_first",
+      "scores": {
+        "correctness": 3,
+        "completeness": 3,
+        "clarity": 3,
+        "independence": 4
+      },
+      "rationale": "Assumes 'within 2 minutes' includes exactly 2:00, which the story leaves unspecified; hitting the exact timestamp and verifying no charge lack concrete method.",
+      "parse_ok": true,
+      "latency_ms": 3427.0,
+      "cost_usd": 0.019545,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-004",
+      "case_id": "TC-2",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Expiry test follows AC-1, but the error text is assumed and hedged; it skips verifying the email is sent and the just-under-30-minute boundary.",
+      "parse_ok": true,
+      "latency_ms": 4788.0,
+      "cost_usd": 0.019233,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-005",
+      "case_id": "TC-5",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 5,
+        "clarity": 5,
+        "independence": 5
+      },
+      "rationale": "Correctly checks the AC-3 message and that nothing is attached; 'no upload begins' goes beyond AC-3, which, unlike AC-2, doesn't specify pre-upload rejection timing.",
+      "parse_ok": true,
+      "latency_ms": 3643.0,
+      "cost_usd": 0.019269,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-006",
+      "case_id": "TC-1",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Expectations match AC-1, but 'valid password' is unspecified, the link isn't confirmed to be verification-specific, and inbox access for newuser@example.com isn't stated.",
+      "parse_ok": true,
+      "latency_ms": 2955.0,
+      "cost_usd": 0.017997,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-007",
+      "case_id": "TC-1",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Expectations match AC-1, but it tests only an increase and never says how to commit the input or how to confirm no page reload occurred.",
+      "parse_ok": true,
+      "latency_ms": 3216.0,
+      "cost_usd": 0.018593000000000002,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-008",
+      "case_id": "TC-7",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Accurately tests inclusive bounds with adjacent exclusions; lacks a mid-range product check, and the starting page or navigation to the catalog filter is not stated.",
+      "parse_ok": true,
+      "latency_ms": 3243.0,
+      "cost_usd": 0.018573,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-009",
+      "case_id": "TC-5",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Positive path is sound, but it asserts unspecified message text and never checks that a missing or wrong password or code blocks disabling.",
+      "parse_ok": true,
+      "latency_ms": 3449.0,
+      "cost_usd": 0.019021,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-010",
+      "case_id": "TC-1",
+      "order": "story_first",
+      "scores": {
+        "correctness": 3,
+        "completeness": 2,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Happy path is sound, but it claims AC-1 without testing hiding after 30 days, skips AC-2's required reason and 500-char limit, and assumes an unspecified character counter.",
+      "parse_ok": true,
+      "latency_ms": 4403.0,
+      "cost_usd": 0.022045000000000002,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-001",
+      "case_id": "TC-6",
+      "order": "story_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Correctly checks rejection and the stated minimum, but skips the boundary (subtotal just below or equal to $75) and assumes the total excludes tax and shipping.",
+      "parse_ok": true,
+      "latency_ms": 4376.0,
+      "cost_usd": 0.022557,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-002",
+      "case_id": "TC-5",
+      "order": "story_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Queue shift is verified, but it never confirms res-700 is cancelled, asserts an unspecified 200/204 status, and leaves the query endpoint unspecified.",
+      "parse_ok": true,
+      "latency_ms": 4691.0,
+      "cost_usd": 0.021445000000000002,
+      "model": "claude-opus-5-5",
+      "error": ""
+    }
+  ],
+  "bias_check": [
+    {
+      "story_id": "ST-009",
+      "case_id": "TC-6",
+      "order": "case_first",
+      "scores": {
+        "correctness": 3,
+        "completeness": 4,
+        "clarity": 3,
+        "independence": 4
+      },
+      "rationale": "Tests both AC-5 rejection paths but asserts specific error messages the story never specifies; lacks concrete data and how to confirm 2FA remains enabled.",
+      "parse_ok": true,
+      "latency_ms": 5189.0,
+      "cost_usd": 0.022125,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-007",
+      "case_id": "TC-3",
+      "order": "case_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 3,
+        "clarity": 5,
+        "independence": 5
+      },
+      "rationale": "Boundary check is sound, but it never verifies the cart total required by AC-1, and AC-2's above-stock snapping and notice go untested.",
+      "parse_ok": true,
+      "latency_ms": 3192.0,
+      "cost_usd": 0.019121,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-009",
+      "case_id": "TC-5",
+      "order": "case_first",
+      "scores": {
+        "correctness": 3,
+        "completeness": 3,
+        "clarity": 4,
+        "independence": 4
+      },
+      "rationale": "Only the happy path is tested, so the 'requires' condition (rejecting a wrong password or code) is never shown. The exact confirmation message is invented, not specified.",
+      "parse_ok": true,
+      "latency_ms": 3976.0,
+      "cost_usd": 0.020161000000000002,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-005",
+      "case_id": "TC-6",
+      "order": "case_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 5,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Covers AC-4's progress bar, cancel, and not-attached outcome; 'stops immediately' goes beyond the spec and is hard to observe, and the throttling method is unspecified.",
+      "parse_ok": true,
+      "latency_ms": 3787.0,
+      "cost_usd": 0.020537,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-007",
+      "case_id": "TC-4",
+      "order": "case_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 4,
+        "clarity": 3,
+        "independence": 4
+      },
+      "rationale": "Matches AC-3, but doesn't check the item stays during the toast or that it lasts about 5s; unspecified other items leave the expected total unstated.",
+      "parse_ok": true,
+      "latency_ms": 3730.0,
+      "cost_usd": 0.019181,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-008",
+      "case_id": "TC-2",
+      "order": "case_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 5,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Checks AC-2's error text and that no filter is applied; URL check is a reasonable inference; 'remains unfiltered' lacks a concrete count; preconditions self-contained.",
+      "parse_ok": true,
+      "latency_ms": 3631.0,
+      "cost_usd": 0.019749,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-002",
+      "case_id": "TC-4",
+      "order": "case_first",
+      "scores": {
+        "correctness": 5,
+        "completeness": 5,
+        "clarity": 5,
+        "independence": 5
+      },
+      "rationale": "Directly tests AC-4's only stated outcome (404 for unknown book id) with concrete data and preconditions; checking no reservation was created would be a useful extra.",
+      "parse_ok": true,
+      "latency_ms": 3527.0,
+      "cost_usd": 0.019493000000000003,
+      "model": "claude-opus-5-5",
+      "error": ""
+    },
+    {
+      "story_id": "ST-009",
+      "case_id": "TC-1",
+      "order": "case_first",
+      "scores": {
+        "correctness": 4,
+        "completeness": 4,
+        "clarity": 4,
+        "independence": 5
+      },
+      "rationale": "Covers AC-1 and AC-3 well, but asserts an unspecified confirmation message and checkbox label, and never checks codes are unique or single-use.",
+      "parse_ok": true,
+      "latency_ms": 4014.0,
+      "cost_usd": 0.021677000000000002,
+      "model": "claude-opus-5-5",
+      "error": ""
+    }
+  ],
+  "sampled": true,
+  "total_cases": 71
+}

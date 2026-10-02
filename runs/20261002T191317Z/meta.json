@@ -1,0 +1,9 @@
+{
+  "run_id": "20261002T191317Z",
+  "date": "2026-10-02",
+  "provider": "claude-cli",
+  "model": "sonnet",
+  "stories": "datasets/stories.jsonl",
+  "harness_version": "0.1.0",
+  "claude_cli_version": "2.1.281 (Claude Code)"
+}
