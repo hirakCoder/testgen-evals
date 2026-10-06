@@ -1,5 +1,8 @@
 # testgen-evals
 
+**TL;DR from the committed run:** an LLM wrote 71 test cases for 10 user stories. Every acceptance criterion was tagged as covered — 100%, schema-valid, no vague steps. A second model then graded each case and scored **9 of 52 cases 2/5 on completeness**: right criterion, one branch checked. Tag-level coverage is necessary, not sufficient. [Results](#results) · [How it scores](#how-it-scores)
+
+
 An evaluation harness for LLM-generated test cases.
 
 Give it user stories with acceptance criteria. An LLM writes structured test cases for each

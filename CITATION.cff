@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this harness, please cite it."
+title: "testgen-evals: an evaluation harness for LLM-generated test cases"
+authors:
+  - family-names: Banerjee
+    given-names: Hirak
+version: 0.1.0
+date-released: 2026-10-06
+license: MIT
+repository-code: https://github.com/hirakCoder/testgen-evals
+url: https://hirakcoder.github.io
